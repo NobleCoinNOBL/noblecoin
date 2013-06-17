@@ -5,11 +5,11 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>About Bitcoin</source>
+        <source>About Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Bitcoin&lt;/b&gt; version</source>
+        <source>&lt;b&gt;Florincoin&lt;/b&gt; version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -46,7 +46,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <source>These are your Florincoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -58,7 +58,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sign a message to prove you own a Bitcoin address</source>
+        <source>Sign a message to prove you own a Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -66,7 +66,7 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Verify a message to ensure it was signed with a specified Bitcoin address</source>
+        <source>Verify a message to ensure it was signed with a specified Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -185,7 +185,7 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bitcoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
+        <source>Florincoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -224,7 +224,7 @@ Are you sure you wish to encrypt your wallet?</source>
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Bitcoin Wallet</source>
+        <source>Florincoin Wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -232,7 +232,7 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show/Hide &amp;Bitcoin</source>
+        <source>Show/Hide &amp;Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -288,7 +288,7 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show information about Bitcoin</source>
+        <source>Show information about Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -331,15 +331,15 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sign a message to prove you own a Bitcoin address</source>
+        <source>Sign a message to prove you own a Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Verify a message to ensure it was signed with a specified Bitcoin address</source>
+        <source>Verify a message to ensure it was signed with a specified Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -347,11 +347,11 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Modify configuration options for Bitcoin</source>
+        <source>Modify configuration options for Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show or hide the Bitcoin window</source>
+        <source>Show or hide the Florincoin window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -407,14 +407,14 @@ Are you sure you wish to encrypt your wallet?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bitcoin client</source>
+        <source>Florincoin client</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
+        <source>%n active connection(s) to Florincoin network</source>
         <translation>
-            <numerusform>%n active connection to Bitcoin network</numerusform>
-            <numerusform>%n active connections to Bitcoin network</numerusform>
+            <numerusform>%n active connection to Florincoin network</numerusform>
+            <numerusform>%n active connections to Florincoin network</numerusform>
         </translation>
     </message>
     <message>
@@ -490,7 +490,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>URI can not be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid Florincoin address or malformed URI parameters.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -518,7 +518,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A fatal error occured. Bitcoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occured. Florincoin can no longer continue safely and will quit.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -572,7 +572,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid Florincoin address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -587,7 +587,7 @@ Address: %4
 <context>
     <name>GUIUtil::HelpMessageBox</name>
     <message>
-        <source>Bitcoin-Qt</source>
+        <source>Florincoin-Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -638,11 +638,11 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Automatically start Bitcoin after logging in to the system.</source>
+        <source>Automatically start Florincoin after logging in to the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Start Bitcoin on system login</source>
+        <source>&amp;Start Florincoin on system login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -658,7 +658,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Florincoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -666,7 +666,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <source>Connect to the Florincoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -726,7 +726,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting Bitcoin.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting Florincoin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -738,7 +738,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Whether to show Bitcoin addresses in the transaction list or not.</source>
+        <source>Whether to show Florincoin addresses in the transaction list or not.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -766,7 +766,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>This setting will take effect after restarting Bitcoin.</source>
+        <source>This setting will take effect after restarting Florincoin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -781,7 +781,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Florincoin network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -879,7 +879,7 @@ Address: %4
 <context>
     <name>RPCConsole</name>
     <message>
-        <source>Bitcoin debug window</source>
+        <source>Florincoin debug window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -943,7 +943,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open the Bitcoin debug logfile from the current data directory. This can take a few seconds for large logfiles.</source>
+        <source>Open the Florincoin debug logfile from the current data directory. This can take a few seconds for large logfiles.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -955,7 +955,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show the Bitcoin-Qt help message to get a list with possible Bitcoin command-line options.</source>
+        <source>Show the Florincoin-Qt help message to get a list with possible Florincoin command-line options.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -975,7 +975,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Welcome to the Bitcoin RPC console.</source>
+        <source>Welcome to the Florincoin RPC console.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1117,7 +1117,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <source>Enter a Florincoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1164,7 +1164,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1188,7 +1188,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Florincoin address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1196,7 +1196,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <source>Enter a Florincoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1204,7 +1204,7 @@ Address: %4
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter Bitcoin signature</source>
+        <source>Enter Florincoin signature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1649,7 +1649,7 @@ Address: %4
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Bitcoin version</source>
+        <source>Florincoin version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1902,11 +1902,11 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot obtain a lock on data directory %s.  Bitcoin is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s.  Florincoin is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Bitcoin</source>
+        <source>Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1934,11 +1934,11 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin</source>
+        <source>Error loading wallet.dat: Wallet requires newer version of Florincoin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Bitcoin to complete</source>
+        <source>Wallet needed to be rewritten: restart Florincoin to complete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2010,7 +2010,7 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to bind to %s on this computer. Bitcoin is probably already running.</source>
+        <source>Unable to bind to %s on this computer. Florincoin is probably already running.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2079,7 +2079,7 @@ If the file does not exist, create it with owner-readable-only file permissions.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer&apos;s date and time are correct.  If your clock is wrong Bitcoin will not work properly.</source>
+        <source>Warning: Please check that your computer&apos;s date and time are correct.  If your clock is wrong Florincoin will not work properly.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

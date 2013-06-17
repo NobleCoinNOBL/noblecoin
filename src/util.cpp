@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Litecoin Developers
+// Copyright (c) 2013 Florincoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -978,7 +979,7 @@ boost::filesystem::path GetDefaultDataDir()
     // Unix: ~/.litecoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Litecoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Florincoin";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -990,10 +991,10 @@ boost::filesystem::path GetDefaultDataDir()
     // Mac
     pathRet /= "Library/Application Support";
     fs::create_directory(pathRet);
-    return pathRet / "Litecoin";
+    return pathRet / "Florincoin";
 #else
     // Unix
-    return pathRet / ".litecoin";
+    return pathRet / ".florincoin";
 #endif
 #endif
 }
@@ -1025,7 +1026,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
         path = GetDefaultDataDir();
     }
     if (fNetSpecific && GetBoolArg("-testnet", false))
-        path /= "testnet3";
+        path /= "testnet";
 
     fs::create_directory(path);
 
@@ -1035,7 +1036,7 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
 
 boost::filesystem::path GetConfigFile()
 {
-    boost::filesystem::path pathConfigFile(GetArg("-conf", "litecoin.conf"));
+    boost::filesystem::path pathConfigFile(GetArg("-conf", "florincoin.conf"));
     if (!pathConfigFile.is_complete()) pathConfigFile = GetDataDir(false) / pathConfigFile;
     return pathConfigFile;
 }
@@ -1066,7 +1067,7 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
 
 boost::filesystem::path GetPidFile()
 {
-    boost::filesystem::path pathPidFile(GetArg("-pid", "litecoind.pid"));
+    boost::filesystem::path pathPidFile(GetArg("-pid", "florincoind.pid"));
     if (!pathPidFile.is_complete()) pathPidFile = GetDataDir() / pathPidFile;
     return pathPidFile;
 }

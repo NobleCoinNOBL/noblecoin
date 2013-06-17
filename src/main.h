@@ -1,6 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Litecoin Developers
+// Copyright (c) 2013 Florincoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
@@ -30,9 +31,10 @@ static const unsigned int MAX_BLOCK_SIZE = 1000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
+static const unsigned int MAX_TX_COMMENT_LEN = 140; // Florincoin: 128 bytes + little extra
 static const int64 MIN_TX_FEE = 10000000;
 static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE;
-static const int64 MAX_MONEY = 84000000 * COIN; // Litecoin: maximum of 840k coins
+static const int64 MAX_MONEY = 160000000 * COIN; // Florincoin: maximum of 160 million coins
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 static const int COINBASE_MATURITY = 100;
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
@@ -390,11 +392,13 @@ typedef std::map<uint256, std::pair<CTxIndex, CTransaction> > MapPrevTx;
 class CTransaction
 {
 public:
-    static const int CURRENT_VERSION=1;
+    static const int LEGACY_VERSION_1 = 1;
+    static const int CURRENT_VERSION = 2;
     int nVersion;
     std::vector<CTxIn> vin;
     std::vector<CTxOut> vout;
     unsigned int nLockTime;
+	std::string strTxComment;
 
     // Denial-of-service detection:
     mutable int nDoS;
@@ -412,6 +416,8 @@ public:
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
+		if(this->nVersion > LEGACY_VERSION_1) { 
+        READWRITE(strTxComment); }
     )
 
     void SetNull()
@@ -420,6 +426,7 @@ public:
         vin.clear();
         vout.clear();
         nLockTime = 0;
+		strTxComment.clear();
         nDoS = 0;  // Denial-of-service prevention
     }
 
@@ -631,12 +638,14 @@ public:
     std::string ToString() const
     {
         std::string str;
-        str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%d, vout.size=%d, nLockTime=%d)\n",
+        str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%d, vout.size=%d, nLockTime=%d, strTxComment=%s)\n",
             GetHash().ToString().substr(0,10).c_str(),
             nVersion,
             vin.size(),
             vout.size(),
-            nLockTime);
+            nLockTime,
+			strTxComment.substr(0,30).c_str()
+			);
         for (unsigned int i = 0; i < vin.size(); i++)
             str += "    " + vin[i].ToString() + "\n";
         for (unsigned int i = 0; i < vout.size(); i++)
