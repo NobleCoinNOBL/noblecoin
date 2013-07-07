@@ -1084,8 +1084,8 @@ Adres: %4
     </message>
     <message>
         <location filename="../forms/qrcodedialog.ui" line="105"/>
-        <source>BTC</source>
-        <translation>BTC</translation>
+        <source>FLO</source>
+        <translation>FLO</translation>
     </message>
     <message>
         <location filename="../forms/qrcodedialog.ui" line="121"/>
@@ -1290,8 +1290,8 @@ Adres: %4
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="113"/>
-        <source>123.456 BTC</source>
-        <translation>123.456 BTC</translation>
+        <source>123.456 FLO</source>
+        <translation>123.456 FLO</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="144"/>
