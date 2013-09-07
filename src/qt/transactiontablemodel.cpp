@@ -412,9 +412,13 @@ QString TransactionTableModel::formatTxComment(const TransactionRecord *wtx, boo
     case TransactionRecord::RecvWithAddress:
         return QString::fromStdString(wtx->txcomment);
     case TransactionRecord::SendToAddress:
+        return QString::fromStdString(wtx->txcomment);
     case TransactionRecord::SendToOther:
+        return QString::fromStdString(wtx->txcomment);
     case TransactionRecord::SendToSelf:
+        return QString::fromStdString(wtx->txcomment);
     case TransactionRecord::Generated:
+        return "";
     default:
         return tr("(n/a)");
     }
