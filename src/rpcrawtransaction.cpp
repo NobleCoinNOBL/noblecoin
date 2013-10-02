@@ -191,9 +191,9 @@ Value listunspent(const Array& params, bool fHelp)
 
 Value createrawtransaction(const Array& params, bool fHelp)
 {
-    if (fHelp || params.size() != 2)
+    if (fHelp || (params.size() < 2 || params.size() > 3))
         throw runtime_error(
-            "createrawtransaction [{\"txid\":txid,\"vout\":n},...] {address:amount,...}\n"
+            "createrawtransaction [{\"txid\":txid,\"vout\":n},...] {address:amount,...} [tx-comment]\n"
             "Create a transaction spending given inputs\n"
             "(array of objects containing transaction id and output number),\n"
             "sending to given address(es).\n"
@@ -207,6 +207,16 @@ Value createrawtransaction(const Array& params, bool fHelp)
     Object sendTo = params[1].get_obj();
 
     CTransaction rawTx;
+
+    if (params.size() == 3) 
+    {
+	std::string txcomment = params[2].get_str();
+        if (txcomment.length() > 140)
+	{
+            txcomment.resize(140);
+        }
+    	rawTx.strTxComment = txcomment;
+    }
 
     BOOST_FOREACH(Value& input, inputs)
     {
