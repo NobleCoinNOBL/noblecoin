@@ -1152,7 +1152,9 @@ void MapPort()
 static const char *strDNSSeed[][2] = {
     {"florincoin.zapto.org", "florincoin.zapto.org"},
     {"seed1.florincoin.org", "seed1.florincoin.org"},
+    {"seed2.florincoin.org", "seed2.florincoin.org"},
     {"seed1.florincoin.com", "seed1.florincoin.com"},
+    {"seed2.florincoin.com", "seed2.florincoin.com"},
 };
 
 void ThreadDNSAddressSeed(void* parg)
