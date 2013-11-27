@@ -275,7 +275,7 @@ bool CTransaction::IsStandard() const
         return false;
 
 	// Disallow large transaction comments
-	if (strTxComment.length() > MAX_TX_COMMENT_LEN)
+	if (strTxComment.length() > MAX_TX_COMMENT_LEN_V1)
 		return false;
 
     BOOST_FOREACH(const CTxIn& txin, vin)

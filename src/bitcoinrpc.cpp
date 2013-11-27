@@ -667,9 +667,12 @@ Value sendtoaddress(const Array& params, bool fHelp)
 	std::string txcomment;
     if (params.size() > 4 && params[4].type() != null_type && !params[4].get_str().empty())
 	{
+        //int TxCommentMaxLen = MAX_TX_COMMENT_LEN_V1;
+        //if (nBestHeight >= TX_COMMENT_V2_HEIGHT)
+        //    TxCommentMaxLen = MAX_TX_COMMENT_LEN_V2;
         txcomment = params[4].get_str();
-		if (txcomment.length() > MAX_TX_COMMENT_LEN)
-			txcomment.resize(MAX_TX_COMMENT_LEN);
+		if (txcomment.length() > MAX_TX_COMMENT_LEN_V1)
+			txcomment.resize(MAX_TX_COMMENT_LEN_V1);
 	}
 
     if (pwalletMain->IsLocked())
@@ -1001,9 +1004,12 @@ Value sendfrom(const Array& params, bool fHelp)
 	std::string txcomment;
     if (params.size() > 6 && params[6].type() != null_type && !params[6].get_str().empty())
 	{
+        //int TxCommentMaxLen = MAX_TX_COMMENT_LEN_V1;
+        //if (nBestHeight >= TX_COMMENT_V2_HEIGHT)
+        //    TxCommentMaxLen = MAX_TX_COMMENT_LEN_V2;
         txcomment = params[6].get_str();
-		if (txcomment.length() > MAX_TX_COMMENT_LEN)
-			txcomment.resize(MAX_TX_COMMENT_LEN);
+		if (txcomment.length() > MAX_TX_COMMENT_LEN_V1)
+			txcomment.resize(MAX_TX_COMMENT_LEN_V1);
 	}
 
     EnsureWalletIsUnlocked();
