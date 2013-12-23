@@ -222,7 +222,7 @@ void ThreadIRCSeed2(void* parg)
 
     while (!fShutdown)
     {
-        CService addrConnect("173.246.103.92", 6667); // irc.lfnet.org
+        CService addrConnect("92.243.23.21", 6667); // irc.lfnet.org
 
         CService addrIRC("irc.lfnet.org", 6667, true);
         if (addrIRC.IsValid())
