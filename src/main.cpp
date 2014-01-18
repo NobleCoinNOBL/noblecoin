@@ -275,7 +275,7 @@ bool CTransaction::IsStandard() const
         return false;
 
 	// Disallow large transaction comments
-	if (strTxComment.length() > MAX_TX_COMMENT_LEN)
+	if (strTxComment.length() > MAX_TX_COMMENT_LEN_V2)
 		return false;
 
     BOOST_FOREACH(const CTxIn& txin, vin)
@@ -841,9 +841,13 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 60 * 60; // Florincoin: 60 minutes (Litecoin: 3.5 days)
+static const int64 nTargetTimespan_Version1 = 60 * 60; // Florincoin: 60 minutes (Litecoin: 3.5 days)
 static const int64 nTargetSpacing = 40; // Florincoin: 40 seconds (~1/4x Litecoin: 2.5 minutes)
-static const int64 nInterval = nTargetTimespan / nTargetSpacing; // Florincoin: 90 blocks
+static const int64 nInterval_Version1 = nTargetTimespan_Version1 / nTargetSpacing; // Florincoin: 90 blocks
+
+static const int64 nHeight_Version2 = 208440;
+static const int64 nInterval_Version2 = 15;
+static const int64 nTargetTimespan_Version2 = nInterval_Version2 * nTargetSpacing; // 10 minutes
 
 //
 // minimum amount of work that could possibly be required nTime after
@@ -863,7 +867,7 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
         // Maximum 400% adjustment...
         bnResult *= 4;
         // ... in best-case exactly 4-times-normal target time
-        nTime -= nTargetTimespan*4;
+        nTime -= nTargetTimespan_Version2*4;
     }
     if (bnResult > bnProofOfWorkLimit)
         bnResult = bnProofOfWorkLimit;
@@ -877,7 +881,21 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     // Genesis block
     if (pindexLast == NULL)
         return nProofOfWorkLimit;
-
+        
+    unsigned int nInterval;
+    unsigned int nTargetTimespan;
+    
+    if (pindexLast->nHeight+1 < nHeight_Version2)
+    {
+        nInterval = nInterval_Version1;
+        nTargetTimespan = nTargetTimespan_Version1;
+    }
+    else
+    {
+        nInterval = nInterval_Version2;
+        nTargetTimespan = nTargetTimespan_Version2;
+    }
+        
     // Only change once per interval
     if ((pindexLast->nHeight+1) % nInterval != 0)
     {

@@ -667,9 +667,12 @@ Value sendtoaddress(const Array& params, bool fHelp)
 	std::string txcomment;
     if (params.size() > 4 && params[4].type() != null_type && !params[4].get_str().empty())
 	{
+        unsigned int TxCommentMaxLen = MAX_TX_COMMENT_LEN_V1;
+        if (nBestHeight >= (int)TX_COMMENT_V2_HEIGHT)
+            TxCommentMaxLen = MAX_TX_COMMENT_LEN_V2;
         txcomment = params[4].get_str();
-		if (txcomment.length() > MAX_TX_COMMENT_LEN)
-			txcomment.resize(MAX_TX_COMMENT_LEN);
+		if (txcomment.length() > TxCommentMaxLen)
+			txcomment.resize(TxCommentMaxLen);
 	}
 
     if (pwalletMain->IsLocked())
@@ -1001,9 +1004,12 @@ Value sendfrom(const Array& params, bool fHelp)
 	std::string txcomment;
     if (params.size() > 6 && params[6].type() != null_type && !params[6].get_str().empty())
 	{
+        unsigned int TxCommentMaxLen = MAX_TX_COMMENT_LEN_V1;
+        if (nBestHeight >= (int)TX_COMMENT_V2_HEIGHT)
+            TxCommentMaxLen = MAX_TX_COMMENT_LEN_V2;
         txcomment = params[6].get_str();
-		if (txcomment.length() > MAX_TX_COMMENT_LEN)
-			txcomment.resize(MAX_TX_COMMENT_LEN);
+		if (txcomment.length() > TxCommentMaxLen)
+			txcomment.resize(TxCommentMaxLen);
 	}
 
     EnsureWalletIsUnlocked();
@@ -2328,8 +2334,36 @@ Value getblock(const Array& params, bool fHelp)
     return blockToJSON(block, pblockindex);
 }
 
+Value makekeypair(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() > 1)
+        throw runtime_error(
+            "makekeypair [prefix]\n"
+            "Make a public/private key pair.\n"
+            "[prefix] is optional preferred prefix for the public key.\n");
 
+    string strPrefix = "";
+    if (params.size() > 0)
+        strPrefix = params[0].get_str();
 
+    CKey key;
+    int nCount = 0;
+    do
+    {
+        key.MakeNewKey(false);
+        nCount++;
+    } while (nCount < 10000 && strPrefix != HexStr(key.GetPubKey().Raw()).substr(0, strPrefix.size()));
+
+    if (strPrefix != HexStr(key.GetPubKey().Raw()).substr(0, strPrefix.size()))
+        return Value::null;
+
+    bool fCompressed;
+    CSecret vchSecret = key.GetSecret(fCompressed);
+    Object result;
+    result.push_back(Pair("PublicKey", HexStr(key.GetPubKey().Raw())));
+    result.push_back(Pair("PrivateKey", CBitcoinSecret(vchSecret, fCompressed).ToString()));
+    return result;
+}
 
 
 
@@ -2398,6 +2432,7 @@ static const CRPCCommand vRPCCommands[] =
     { "decoderawtransaction",   &decoderawtransaction,   false },
     { "signrawtransaction",     &signrawtransaction,     false },
     { "sendrawtransaction",     &sendrawtransaction,     false },
+    { "makekeypair",            &makekeypair,            false },
 };
 
 CRPCTable::CRPCTable()
