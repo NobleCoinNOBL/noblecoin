@@ -16,7 +16,7 @@
 #define CLIENT_VERSION_MAJOR       0
 #define CLIENT_VERSION_MINOR       6
 #define CLIENT_VERSION_REVISION    5
-#define CLIENT_VERSION_BUILD       12
+#define CLIENT_VERSION_BUILD       13
 
 static const int CLIENT_VERSION =
                            1000000 * CLIENT_VERSION_MAJOR

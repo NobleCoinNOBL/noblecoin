@@ -841,38 +841,80 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan_Version1 = 60 * 60; // Florincoin: 60 minutes (Litecoin: 3.5 days)
 static const int64 nTargetSpacing = 40; // Florincoin: 40 seconds (~1/4x Litecoin: 2.5 minutes)
+
+static const int64 nTargetTimespan_Version1 = 60 * 60; // Florincoin: 60 minutes (Litecoin: 3.5 days)
 static const int64 nInterval_Version1 = nTargetTimespan_Version1 / nTargetSpacing; // Florincoin: 90 blocks
 
 static const int64 nHeight_Version2 = 208440;
 static const int64 nInterval_Version2 = 15;
 static const int64 nTargetTimespan_Version2 = nInterval_Version2 * nTargetSpacing; // 10 minutes
 
+static const int64 nHeight_Version3 = 426000;
+static const int64 nInterval_Version3 = 1;
+static const int64 nTargetTimespan_Version3 = nInterval_Version3 * nTargetSpacing; // 40 seconds
+
+static const int64 nMaxAdjustDown_Version1 = 300; // 100+300 ~= 400% adjustment down
+static const int64 nMaxAdjustUp_Version1 = 75; // 100-75 = 25% of original ~= 400% adjustment up
+
+static const int64 nMaxAdjustDown_Version2 = nMaxAdjustDown_Version1;
+static const int64 nMaxAdjustUp_Version2 = nMaxAdjustUp_Version1;
+
+static const int64 nMaxAdjustDown_Version3 = 3; // 100+3 ~= 3% down
+static const int64 nMaxAdjustUp_Version3 = 2; // 100-2 = 98% of original ~= 2% up
+
+static const int64 nTargetTimespanAdjDown_Version1 = nTargetTimespan_Version1 * (100 + nMaxAdjustDown_Version1) / 100;
+static const int64 nTargetTimespanAdjDown_Version2 = nTargetTimespan_Version2 * (100 + nMaxAdjustDown_Version2) / 100;
+static const int64 nTargetTimespanAdjDown_Version3 = nTargetTimespan_Version3 * (100 + nMaxAdjustDown_Version3) / 100;
+
+static const int64 nAveragingInterval_Version1 = nInterval_Version1;
+static const int64 nAveragingInterval_Version2 = nInterval_Version2;
+static const int64 nAveragingInterval_Version3 = 6;
+
+static const int64 nAveragingTargetTimespan_Version1 = nAveragingInterval_Version1 * nTargetSpacing; 
+static const int64 nAveragingTargetTimespan_Version2 = nAveragingInterval_Version2 * nTargetSpacing; 
+static const int64 nAveragingTargetTimespan_Version3 = nAveragingInterval_Version3 * nTargetSpacing; 
+
 //
 // minimum amount of work that could possibly be required nTime after
 // minimum work required was nBase
 //
-unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
+unsigned int ComputeMinWork(unsigned int nBase, int64 nTime, int64 nCheckpointTime, int64 nBlockTime)
 {
     // Testnet has min-difficulty blocks
     // after nTargetSpacing*2 time between blocks:
     if (fTestNet && nTime > nTargetSpacing*2)
         return bnProofOfWorkLimit.GetCompact();
 
+    int64 nMaxAdjustDown;
+    int64 nTargetTimespanAdjDown;
+    
+    nMaxAdjustDown = nMaxAdjustDown_Version1; // max v1, v2, v3 = 400%
+    nTargetTimespanAdjDown = nTargetTimespanAdjDown_Version3; // min v1, v2, v3 = 6 blocks
+     
     CBigNum bnResult;
     bnResult.SetCompact(nBase);
     while (nTime > 0 && bnResult < bnProofOfWorkLimit)
     {
         // Maximum 400% adjustment...
-        bnResult *= 4;
+        bnResult *= (100 + nMaxAdjustDown);
+        bnResult /= 100;
         // ... in best-case exactly 4-times-normal target time
-        nTime -= nTargetTimespan_Version2*4;
+        nTime -= nTargetTimespanAdjDown;
     }
     if (bnResult > bnProofOfWorkLimit)
         bnResult = bnProofOfWorkLimit;
     return bnResult.GetCompact();
 }
+
+static const int64 nMinActualTimespan_Version1 = nAveragingTargetTimespan_Version1 * (100 - nMaxAdjustUp_Version1) / 100;
+static const int64 nMaxActualTimespan_Version1 = nAveragingTargetTimespan_Version1 * (100 + nMaxAdjustDown_Version1) / 100;
+    
+static const int64 nMinActualTimespan_Version2 = nAveragingTargetTimespan_Version2 * (100 - nMaxAdjustUp_Version2) / 100;
+static const int64 nMaxActualTimespan_Version2 = nAveragingTargetTimespan_Version2 * (100 + nMaxAdjustDown_Version2) / 100;
+
+static const int64 nMinActualTimespan_Version3 = nAveragingTargetTimespan_Version3 * (100 - nMaxAdjustUp_Version3) / 100;
+static const int64 nMaxActualTimespan_Version3 = nAveragingTargetTimespan_Version3 * (100 + nMaxAdjustDown_Version3) / 100;
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlock *pblock)
 {
@@ -884,17 +926,42 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         
     unsigned int nInterval;
     unsigned int nTargetTimespan;
+    int64 nAveragingInterval;
+    int64 nMinActualTimespan;
+    int64 nMaxActualTimespan;
+    int64 nAveragingTargetTimespan;
     
     if (pindexLast->nHeight+1 < nHeight_Version2)
     {
+        printf("Ver1");
+        nAveragingInterval = nAveragingInterval_Version1;
         nInterval = nInterval_Version1;
         nTargetTimespan = nTargetTimespan_Version1;
+        nMinActualTimespan = nMinActualTimespan_Version1;
+        nMaxActualTimespan = nMaxActualTimespan_Version1;
+        nAveragingTargetTimespan = nAveragingTargetTimespan_Version1;
     }
     else
-    {
-        nInterval = nInterval_Version2;
-        nTargetTimespan = nTargetTimespan_Version2;
-    }
+        if (pindexLast->nHeight+1 < nHeight_Version3)
+        {
+            printf("Ver2");
+            nAveragingInterval = nAveragingInterval_Version2;
+            nInterval = nInterval_Version2;
+            nTargetTimespan = nTargetTimespan_Version2;
+            nMinActualTimespan = nMinActualTimespan_Version2;
+            nMaxActualTimespan = nMaxActualTimespan_Version2;
+            nAveragingTargetTimespan = nAveragingTargetTimespan_Version2;
+        }
+        else
+        {
+            printf("Ver3");
+            nAveragingInterval = nAveragingInterval_Version3;
+            nInterval = nInterval_Version3;
+            nTargetTimespan = nTargetTimespan_Version3;
+            nMinActualTimespan = nMinActualTimespan_Version3;
+            nMaxActualTimespan = nMaxActualTimespan_Version3;
+            nAveragingTargetTimespan = nAveragingTargetTimespan_Version3;
+        }
         
     // Only change once per interval
     if ((pindexLast->nHeight+1) % nInterval != 0)
@@ -921,29 +988,29 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
     // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
-    int blockstogoback = nInterval-1;
-    if ((pindexLast->nHeight+1) != nInterval)
-        blockstogoback = nInterval;
-
-    // Go back by what we want to be 14 days worth of blocks
+    int blockstogoback = nAveragingInterval-1;
+    if ((pindexLast->nHeight+1) != nAveragingInterval)
+        blockstogoback = nAveragingInterval;
+        
+    // Go back by what we want to be nAveragingInterval blocks
     const CBlockIndex* pindexFirst = pindexLast;
     for (int i = 0; pindexFirst && i < blockstogoback; i++)
         pindexFirst = pindexFirst->pprev;
     assert(pindexFirst);
-
+    
     // Limit adjustment step
     int64 nActualTimespan = pindexLast->GetBlockTime() - pindexFirst->GetBlockTime();
-    printf("  nActualTimespan = %"PRI64d"  before bounds\n", nActualTimespan);
-    if (nActualTimespan < nTargetTimespan/4)
-        nActualTimespan = nTargetTimespan/4;
-    if (nActualTimespan > nTargetTimespan*4)
-        nActualTimespan = nTargetTimespan*4;
-
+    printf("  nActualTimespan = %"PRI64d"  before bounds\n", nActualTimespan);       
+    if (nActualTimespan < nMinActualTimespan)
+        nActualTimespan = nMinActualTimespan;
+    if (nActualTimespan > nMaxActualTimespan)
+        nActualTimespan = nMaxActualTimespan;
+        
     // Retarget
     CBigNum bnNew;
     bnNew.SetCompact(pindexLast->nBits);
     bnNew *= nActualTimespan;
-    bnNew /= nTargetTimespan;
+    bnNew /= nAveragingTargetTimespan;
 
     if (bnNew > bnProofOfWorkLimit)
         bnNew = bnProofOfWorkLimit;
@@ -1869,7 +1936,7 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
         CBigNum bnNewBlock;
         bnNewBlock.SetCompact(pblock->nBits);
         CBigNum bnRequired;
-        bnRequired.SetCompact(ComputeMinWork(pcheckpoint->nBits, deltaTime));
+        bnRequired.SetCompact(ComputeMinWork(pcheckpoint->nBits, deltaTime, pcheckpoint->nTime, pblock->GetBlockTime()));
         if (bnNewBlock > bnRequired)
         {
             if (pfrom)
