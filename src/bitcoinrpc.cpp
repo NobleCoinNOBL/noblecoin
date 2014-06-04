@@ -2433,6 +2433,7 @@ static const CRPCCommand vRPCCommands[] =
     { "signrawtransaction",     &signrawtransaction,     false },
     { "sendrawtransaction",     &sendrawtransaction,     false },
     { "makekeypair",            &makekeypair,            false },
+    { "getnormalizedtxid",      &getnormalizedtxid,      true },
 };
 
 CRPCTable::CRPCTable()

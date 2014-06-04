@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Litecoin Developers
-// Copyright (c) 2013 Florincoin developers
+// Copyright (c) 2013-2014 Florincoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
@@ -13,6 +13,7 @@
 #include "script.h"
 #include "db.h"
 #include "scrypt.h"
+#include "script.h"
 
 #include <list>
 
@@ -623,6 +624,11 @@ public:
         return true;
     }
 
+    uint256 GetNormalizedHash() const
+    {
+        return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
+    }
+    
     friend bool operator==(const CTransaction& a, const CTransaction& b)
     {
         return (a.nVersion  == b.nVersion &&
