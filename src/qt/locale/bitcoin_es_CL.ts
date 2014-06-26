@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="14"/>
-        <source>About Florincoin</source>
-        <translation>Sobre Florincoin</translation>
+        <source>About Bitcoin</source>
+        <translation>Sobre Bitcoin</translation>
     </message>
     <message>
         <location filename="../forms/aboutdialog.ui" line="53"/>
-        <source>&lt;b&gt;Florincoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Florincoin&lt;/b&gt; - versión </translation>
+        <source>&lt;b&gt;Bitcoin&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Bitcoin&lt;/b&gt; - versión </translation>
     </message>
     <message>
         <location filename="../forms/aboutdialog.ui" line="97"/>
@@ -39,8 +39,8 @@ Este producto include software desarrollado por el proyecto OpenSSL para ser usa
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="20"/>
-        <source>These are your Florincoin addresses for receiving payments.  You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Estas son tus direcciones Florincoin para recibir pagos. Puedes utilizar una diferente por cada persona emisora para saber quien te está pagando.</translation>
+        <source>These are your Bitcoin addresses for receiving payments.  You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Estas son tus direcciones Bitcoin para recibir pagos. Puedes utilizar una diferente por cada persona emisora para saber quien te está pagando.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="36"/>
@@ -223,8 +223,8 @@ Are you sure you wish to encrypt your wallet?</source>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="111"/>
-        <source>Florincoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Florincoin se cerrará para finalizar el proceso de encriptación. Recuerde que encriptar su billetera no protegera completatamente sus bitcoins de ser robados por malware que infecte su computador</translation>
+        <source>Bitcoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
+        <translation>Bitcoin se cerrará para finalizar el proceso de encriptación. Recuerde que encriptar su billetera no protegera completatamente sus bitcoins de ser robados por malware que infecte su computador</translation>
     </message>
     <message>
         <location filename="../askpassphrasedialog.cpp" line="207"/>
@@ -278,8 +278,8 @@ Are you sure you wish to encrypt your wallet?</source>
     <name>BitcoinGUI</name>
     <message>
         <location filename="../bitcoingui.cpp" line="73"/>
-        <source>Florincoin Wallet</source>
-        <translation>Billetera Florincoin</translation>
+        <source>Bitcoin Wallet</source>
+        <translation>Billetera Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="215"/>
@@ -288,8 +288,8 @@ Are you sure you wish to encrypt your wallet?</source>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="248"/>
-        <source>Show/Hide &amp;Florincoin</source>
-        <translation>Mostrar/Ocultar &amp;Florincoin</translation>
+        <source>Show/Hide &amp;Bitcoin</source>
+        <translation>Mostrar/Ocultar &amp;Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="515"/>
@@ -363,8 +363,8 @@ Are you sure you wish to encrypt your wallet?</source>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="240"/>
-        <source>Show information about Florincoin</source>
-        <translation>Muestra información acerca de Florincoin</translation>
+        <source>Show information about Bitcoin</source>
+        <translation>Muestra información acerca de Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="242"/>
@@ -413,18 +413,18 @@ Are you sure you wish to encrypt your wallet?</source>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="210"/>
-        <source>Send coins to a Florincoin address</source>
+        <source>Send coins to a Bitcoin address</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="246"/>
-        <source>Modify configuration options for Florincoin</source>
+        <source>Modify configuration options for Bitcoin</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="249"/>
-        <source>Show or hide the Florincoin window</source>
-        <translation>Mostrar u ocultar la ventana de Florincoin</translation>
+        <source>Show or hide the Bitcoin window</source>
+        <translation>Mostrar u ocultar la ventana de Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="251"/>
@@ -500,13 +500,13 @@ Are you sure you wish to encrypt your wallet?</source>
     <message>
         <location filename="../bitcoingui.cpp" line="343"/>
         <location filename="../bitcoingui.cpp" line="399"/>
-        <source>Florincoin client</source>
-        <translation>Cliente Florincoin</translation>
+        <source>Bitcoin client</source>
+        <translation>Cliente Bitcoin</translation>
     </message>
     <message numerus="yes">
         <location filename="../bitcoingui.cpp" line="492"/>
-        <source>%n active connection(s) to Florincoin network</source>
-        <translation><numerusform>%n conexión activa hacia la red Florincoin</numerusform><numerusform>%n conexiones activas hacia la red Florincoin</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin network</source>
+        <translation><numerusform>%n conexión activa hacia la red Bitcoin</numerusform><numerusform>%n conexiones activas hacia la red Bitcoin</numerusform></translation>
     </message>
     <message>
         <location filename="../bitcoingui.cpp" line="540"/>
@@ -612,7 +612,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="112"/>
-        <source>A fatal error occured. Florincoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occured. Bitcoin can no longer continue safely and will quit.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -638,7 +638,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="263"/>
-        <source>The user interface language can be set here. This setting will only take effect after restarting Florincoin.</source>
+        <source>The user interface language can be set here. This setting will only take effect after restarting Bitcoin.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -663,7 +663,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="285"/>
-        <source>Whether to show Florincoin addresses in the transaction list</source>
+        <source>Whether to show Bitcoin addresses in the transaction list</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -673,7 +673,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="303"/>
-        <source>This setting will take effect after restarting Florincoin.</source>
+        <source>This setting will take effect after restarting Bitcoin.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -731,7 +731,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../editaddressdialog.cpp" line="96"/>
-        <source>The entered address &quot;%1&quot; is not a valid Florincoin address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid Bitcoin address.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -750,7 +750,7 @@ Dirección: %4</translation>
     <message>
         <location filename="../bitcoin.cpp" line="133"/>
         <location filename="../bitcoin.cpp" line="143"/>
-        <source>Florincoin-Qt</source>
+        <source>Bitcoin-Qt</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -814,12 +814,12 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="222"/>
-        <source>&amp;Start Florincoin on system login</source>
+        <source>&amp;Start Bitcoin on system login</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="223"/>
-        <source>Automatically start Florincoin after logging in to the system</source>
+        <source>Automatically start Bitcoin after logging in to the system</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -842,8 +842,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/messagepage.ui" line="38"/>
-        <source>The address to sign the message with  (e.g. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</source>
-        <translation>La dirección con la que codificar el mensaje (ej: FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</translation>
+        <source>The address to sign the message with  (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>La dirección con la que codificar el mensaje (ej: 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location filename="../forms/messagepage.ui" line="48"/>
@@ -907,8 +907,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../messagepage.cpp" line="30"/>
-        <source>Enter a Florincoin address (e.g. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</source>
-        <translation>Introduce una dirección Florincoin (ej. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</translation>
+        <source>Enter a Bitcoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Introduce una dirección Bitcoin (ej. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location filename="../messagepage.cpp" line="83"/>
@@ -953,8 +953,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="348"/>
-        <source>Automatically open the Florincoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abre automáticamente el puerto del cliente Florincoin en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
+        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abre automáticamente el puerto del cliente Bitcoin en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="351"/>
@@ -964,7 +964,7 @@ Dirección: %4</translation>
     <message>
         <location filename="../optionsdialog.cpp" line="352"/>
         <source>Connect to the Bitcon network through a SOCKS4 proxy (e.g. when connecting through Tor)</source>
-        <translation>Conecta a la red Florincoin a través de un proxy SOCKS4 (ej. cuando te conectas por la red Tor)</translation>
+        <translation>Conecta a la red Bitcoin a través de un proxy SOCKS4 (ej. cuando te conectas por la red Tor)</translation>
     </message>
     <message>
         <location filename="../optionsdialog.cpp" line="357"/>
@@ -1005,7 +1005,7 @@ Dirección: %4</translation>
     <message>
         <location filename="../forms/overviewpage.ui" line="47"/>
         <location filename="../forms/overviewpage.ui" line="204"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Florincoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1079,8 +1079,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/qrcodedialog.ui" line="105"/>
-        <source>FLO</source>
-        <translation>FLO</translation>
+        <source>BTC</source>
+        <translation>BTC</translation>
     </message>
     <message>
         <location filename="../forms/qrcodedialog.ui" line="121"/>
@@ -1122,7 +1122,7 @@ Dirección: %4</translation>
     <name>RPCConsole</name>
     <message>
         <location filename="../forms/rpcconsole.ui" line="14"/>
-        <source>Florincoin debug window</source>
+        <source>Bitcoin debug window</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1205,7 +1205,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/rpcconsole.ui" line="299"/>
-        <source>Open the Florincoin debug logfile from the current data directory. This can take a few seconds for large logfiles.</source>
+        <source>Open the Bitcoin debug logfile from the current data directory. This can take a few seconds for large logfiles.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1230,7 +1230,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="212"/>
-        <source>Welcome to the Florincoin RPC console.</source>
+        <source>Welcome to the Bitcoin RPC console.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1285,8 +1285,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="113"/>
-        <source>123.456 FLO</source>
-        <translation>123.456 FLO</translation>
+        <source>123.456 BTC</source>
+        <translation>123.456 BTC</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsdialog.ui" line="144"/>
@@ -1384,8 +1384,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="93"/>
-        <source>The address to send the payment to  (e.g. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</source>
-        <translation>La dirección donde enviar el pago (ej. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</translation>
+        <source>The address to send the payment to  (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>La dirección donde enviar el pago (ej. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location filename="../forms/sendcoinsentry.ui" line="103"/>
@@ -1414,8 +1414,8 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="26"/>
-        <source>Enter a Florincoin address (e.g. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</source>
-        <translation>Introduce una dirección Florincoin (ej. FShM3UpgFZnXzJ5zux1AWQvAE36rFJKMs7)</translation>
+        <source>Enter a Bitcoin address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Introduce una dirección Bitcoin (ej. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
 </context>
 <context>
@@ -1863,12 +1863,12 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../forms/verifymessagedialog.ui" line="20"/>
-        <source>Enter the message and signature below (be careful to correctly copy newlines, spaces, tabs and other invisible characters) to obtain the Florincoin address used to sign the message.</source>
+        <source>Enter the message and signature below (be careful to correctly copy newlines, spaces, tabs and other invisible characters) to obtain the Bitcoin address used to sign the message.</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../forms/verifymessagedialog.ui" line="62"/>
-        <source>Verify a message and obtain the Florincoin address used to sign the message</source>
+        <source>Verify a message and obtain the Bitcoin address used to sign the message</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1898,7 +1898,7 @@ Dirección: %4</translation>
     </message>
     <message>
         <location filename="../verifymessagedialog.cpp" line="28"/>
-        <source>Enter Florincoin signature</source>
+        <source>Enter Bitcoin signature</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1973,8 +1973,8 @@ Dirección: %4</translation>
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="43"/>
-        <source>Florincoin version</source>
-        <translation>Versión Florincoin</translation>
+        <source>Bitcoin version</source>
+        <translation>Versión Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="44"/>
@@ -2266,14 +2266,14 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="121"/>
-        <source>Cannot obtain a lock on data directory %s.  Florincoin is probably already running.</source>
-        <translation>No se puede obtener permiso de trabajo en la carpeta de datos %s. Probablemente Florincoin ya se está ejecutando.
+        <source>Cannot obtain a lock on data directory %s.  Bitcoin is probably already running.</source>
+        <translation>No se puede obtener permiso de trabajo en la carpeta de datos %s. Probablemente Bitcoin ya se está ejecutando.
 </translation>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="48"/>
-        <source>Florincoin</source>
-        <translation>Florincoin</translation>
+        <source>Bitcoin</source>
+        <translation>Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="30"/>
@@ -2322,13 +2322,13 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="135"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Florincoin</source>
-        <translation>Error cargando wallet.dat: Billetera necesita una vercion reciente de Florincoin</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin</source>
+        <translation>Error cargando wallet.dat: Billetera necesita una vercion reciente de Bitcoin</translation>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="136"/>
-        <source>Wallet needed to be rewritten: restart Florincoin to complete</source>
-        <translation>La billetera necesita ser reescrita: reinicie Florincoin para completar</translation>
+        <source>Wallet needed to be rewritten: restart Bitcoin to complete</source>
+        <translation>La billetera necesita ser reescrita: reinicie Bitcoin para completar</translation>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="137"/>
@@ -2427,7 +2427,7 @@ SSL options: (see the Bitcoin Wiki for SSL setup instructions)</source>
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="28"/>
-        <source>Unable to bind to %s on this computer. Florincoin is probably already running.</source>
+        <source>Unable to bind to %s on this computer. Bitcoin is probably already running.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2531,8 +2531,8 @@ If the file does not exist, create it with owner-readable-only file permissions.
     </message>
     <message>
         <location filename="../bitcoinstrings.cpp" line="25"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct.  If your clock is wrong Florincoin will not work properly.</source>
-        <translation>Precaución: Por favor revise que la fecha y hora de tu ordenador son correctas. Si tu reloj está mal configurado Florincoin no funcionará correctamente.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct.  If your clock is wrong Bitcoin will not work properly.</source>
+        <translation>Precaución: Por favor revise que la fecha y hora de tu ordenador son correctas. Si tu reloj está mal configurado Bitcoin no funcionará correctamente.</translation>
     </message>
 </context>
 </TS>

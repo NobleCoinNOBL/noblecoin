@@ -72,24 +72,23 @@ public:
     };
 
     /** Number of confirmation needed for transaction */
-    static const int NumConfirmations = 6;
+    static const int NumConfirmations = 5;
 
     TransactionRecord():
-            hash(), time(0), type(Other), address(""), debit(0), credit(0), txcomment(""), idx(0)
+            hash(), time(0), type(Other), address(""), debit(0), credit(0), idx(0)
     {
     }
 
     TransactionRecord(uint256 hash, int64 time):
             hash(hash), time(time), type(Other), address(""), debit(0),
-            credit(0), txcomment(""), idx(0)
+            credit(0), idx(0)
     {
     }
 
     TransactionRecord(uint256 hash, int64 time,
                 Type type, const std::string &address,
-                int64 debit, int64 credit, const std::string &txcomment):
+                int64 debit, int64 credit):
             hash(hash), time(time), type(type), address(address), debit(debit), credit(credit),
-            txcomment(txcomment),
             idx(0)
     {
     }
@@ -107,7 +106,6 @@ public:
     std::string address;
     int64 debit;
     int64 credit;
-    std::string txcomment;
     /**@}*/
 
     /** Subtransaction index, for sort key */
