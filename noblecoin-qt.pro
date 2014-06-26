@@ -1,20 +1,25 @@
 TEMPLATE = app
 TARGET =
-VERSION = 0.6.4
+VERSION = 1.0.1
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
 CONFIG += no_include_pwd
 
-# for boost 1.37, add -mt to the boost libraries
-# use: qmake BOOST_LIB_SUFFIX=-mt
-# for boost thread win32 with _win32 sufix
-# use: BOOST_THREAD_LIB_SUFFIX=_win32-...
-# or when linking against a specific BerkelyDB version: BDB_LIB_SUFFIX=-4.8
+windows:LIBS += -lshlwapi
+LIBS += $$join(BOOST_LIB_PATH,,-L,) $$join(BDB_LIB_PATH,,-L,) $$join(OPENSSL_LIB_PATH,,-L,) $$join(QRENCODE_LIB_PATH,,-L,)
+LIBS += -lssl -lcrypto -ldb_cxx$$BDB_LIB_SUFFIX
+windows:LIBS += -lws2_32 -lole32 -loleaut32 -luuid -lgdi32
+LIBS += -lboost_system-mgw46-mt-1_54 -lboost_filesystem-mgw46-mt-1_54 -lboost_program_options-mgw46-mt-1_54 -lboost_thread-mgw46-mt-1_54
+BOOST_LIB_SUFFIX=-mgw46-mt-1_54
+BOOST_INCLUDE_PATH=C:/NobleCoin/libs/boost_1_54_0
+BOOST_LIB_PATH=C:/NobleCoin/libs/boost_1_54_0/stage/libs
+BDB_INCLUDE_PATH=c:/NobleCoin/libs/db-4.8.30.NC/build_windows
+BDB_LIB_PATH=c:/NobleCoin/libs/db-4.8.30.NC/build_windows
+OPENSSL_INCLUDE_PATH=C:/NobleCoin/libs/openssl-1.0.1g/include
+OPENSSL_LIB_PATH=C:/NobleCoin/libs/openssl-1.0.1g
 
-# Dependency library locations can be customized with:
-#    BOOST_INCLUDE_PATH, BOOST_LIB_PATH, BDB_INCLUDE_PATH,
-#    BDB_LIB_PATH, OPENSSL_INCLUDE_PATH and OPENSSL_LIB_PATH respectively
-
+ 
+ 
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
@@ -92,7 +97,7 @@ contains(BITCOIN_NEED_QT_PLUGINS, 1) {
     DEFINES += HAVE_BUILD_INFO
 }
 
-QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter
+QMAKE_CXXFLAGS_WARN_ON = -fdiagnostics-show-option -Wall -Wextra -Wformat -Wformat-security -Wno-unused-parameter -D__NO_SYSTEM_INCLUDES
 
 # Input
 DEPENDPATH += src src/json src/qt
@@ -316,7 +321,7 @@ isEmpty(BOOST_INCLUDE_PATH) {
 }
 
 windows:LIBS += -lws2_32 -lshlwapi -lmswsock
-windows:DEFINES += WIN32
+windows:DEFINES += WIN32 WIN32_LEAN_AND_MEAN
 windows:RC_FILE = src/qt/res/bitcoin-qt.rc
 
 windows:!contains(MINGW_THREAD_BUGFIX, 0) {
@@ -340,7 +345,7 @@ macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/bitcoin.icns
-macx:TARGET = "Florincoin-Qt"
+macx:TARGET = "NobleCoin-Qt"
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
