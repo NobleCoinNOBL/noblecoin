@@ -1,7 +1,6 @@
 NobleCoin (NOBLE) - NobleCoin is a new generation of scrypt coin that is descendant of Litecoin. 
 Like Litecoin it uses scrypt as a proof of work scheme.
 
-www.noblemovement.com
 
 Development process
 =============================
