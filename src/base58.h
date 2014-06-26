@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin Developers
 // Copyright (c) 2011-2012 Litecoin Developers
-// Copyright (c) 2013 Florincoin developers
+// Copyright (c) 2013 NobleCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -278,10 +278,10 @@ class CBitcoinAddress : public CBase58Data
 public:
     enum
     {
-        PUBKEY_ADDRESS = 35, // Floriscoin addresses start with F
-        SCRIPT_ADDRESS = 8,
-        PUBKEY_ADDRESS_TEST = 115,
-        SCRIPT_ADDRESS_TEST = 198,
+        PUBKEY_ADDRESS = 21, // NobleCoin addresses start with N
+        SCRIPT_ADDRESS = 5,
+        PUBKEY_ADDRESS_TEST = 111,
+        SCRIPT_ADDRESS_TEST = 196,
     };
 
     bool Set(const CKeyID &id) {
@@ -313,6 +313,7 @@ public:
                 nExpectedSize = 20; // Hash of CScript
                 fExpectTestNet = false;
                 break;
+
             case PUBKEY_ADDRESS_TEST:
                 nExpectedSize = 20;
                 fExpectTestNet = true;

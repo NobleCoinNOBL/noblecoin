@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2011-2012 Litecoin Developers
-// Copyright (c) 2013-2014 Florincoin developers
+// Copyright (c) 2014 NobleCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
@@ -13,7 +13,6 @@
 #include "script.h"
 #include "db.h"
 #include "scrypt.h"
-#include "script.h"
 
 #include <list>
 
@@ -32,14 +31,15 @@ static const unsigned int MAX_BLOCK_SIZE = 1000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
-static const unsigned int MAX_TX_COMMENT_LEN_V1 = 140; // Florincoin: 128 bytes + little extra
-static const unsigned int MAX_TX_COMMENT_LEN_V2 = 528; // V2          512 bytes + little extra
-static const unsigned int TX_COMMENT_V2_HEIGHT = 340000;
-static const int64 MIN_TX_FEE = 10000000;
+static const unsigned int MAX_TX_COMMENT_LEN = 140; // NobleCoin: 128 bytes + little extra
+
+static const int64 MIN_TX_FEE = 1000000;
 static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE;
-static const int64 MAX_MONEY = 160000000 * COIN; // Florincoin: maximum of 160 million coins
+static const int64 MAX_MONEY = 15000000000 * COIN; // NobleCoin: maximum of 15 billion coins
+static const int64 TOTAL_GENERATION = MAX_MONEY;
+static const double SERVICE_TAX_PERCENTAGE = 0.02;
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
-static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY = 30;
 // Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp.
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 #ifdef USE_UPNP
@@ -50,12 +50,6 @@ static const int fHaveUPnP = false;
 
 
 extern CScript COINBASE_FLAGS;
-
-
-
-
-
-
 extern CCriticalSection cs_main;
 extern std::map<uint256, CBlockIndex*> mapBlockIndex;
 extern uint256 hashGenesisBlock;
@@ -111,17 +105,6 @@ int GetNumBlocksOfPeers();
 bool IsInitialBlockDownload();
 std::string GetWarnings(std::string strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock);
-
-
-
-
-
-
-
-
-
-
-
 bool GetWalletFile(CWallet* pwallet, std::string &strWalletFileOut);
 
 /** Position on disk for a particular transaction. */
@@ -221,7 +204,7 @@ public:
 
     std::string ToString() const
     {
-        return strprintf("COutPoint(%s, %d)", hash.ToString().c_str(), n);
+        return strprintf("COutPoint(%s, %d)", hash.ToString().substr(0,10).c_str(), n);
     }
 
     void print() const
@@ -419,8 +402,10 @@ public:
         READWRITE(vin);
         READWRITE(vout);
         READWRITE(nLockTime);
+
 		if(this->nVersion > LEGACY_VERSION_1) { 
         READWRITE(strTxComment); }
+
     )
 
     void SetNull()
@@ -549,7 +534,7 @@ public:
     {
         // Large (in bytes) low-priority (new, small-coin) transactions
         // need a fee.
-        return dPriority > COIN * 576 / 250; // Litecoin: 576 blocks found a day. Priority cutoff is 1 litecoin day / 250 bytes.
+        return dPriority > COIN * 1440 / 250; // NobleCoin: 1440 blocks found a day. Priority cut-off is 1 NobleCoin day / 250 bytes.
     }
 
     int64 GetMinFee(unsigned int nBlockSize=1, bool fAllowFree=true, enum GetMinFee_mode mode=GMF_BLOCK) const
@@ -624,11 +609,6 @@ public:
         return true;
     }
 
-    uint256 GetNormalizedHash() const
-    {
-        return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
-    }
-    
     friend bool operator==(const CTransaction& a, const CTransaction& b)
     {
         return (a.nVersion  == b.nVersion &&
@@ -647,13 +627,14 @@ public:
     {
         std::string str;
         str += strprintf("CTransaction(hash=%s, ver=%d, vin.size=%d, vout.size=%d, nLockTime=%d, strTxComment=%s)\n",
-            GetHash().ToString().c_str(),
+            GetHash().ToString().substr(0,10).c_str(),
             nVersion,
             vin.size(),
             vout.size(),
             nLockTime,
 			strTxComment.substr(0,30).c_str()
 			);
+
         for (unsigned int i = 0; i < vin.size(); i++)
             str += "    " + vin[i].ToString() + "\n";
         for (unsigned int i = 0; i < vout.size(); i++)
@@ -1022,11 +1003,11 @@ public:
     void print() const
     {
         printf("CBlock(hash=%s, PoW=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%d)\n",
-            GetHash().ToString().c_str(),
-            GetPoWHash().ToString().c_str(),
+            GetHash().ToString().substr(0,20).c_str(),
+            GetPoWHash().ToString().substr(0,20).c_str(),
             nVersion,
-            hashPrevBlock.ToString().c_str(),
-            hashMerkleRoot.ToString().c_str(),
+            hashPrevBlock.ToString().substr(0,20).c_str(),
+            hashMerkleRoot.ToString().substr(0,10).c_str(),
             nTime, nBits, nNonce,
             vtx.size());
         for (unsigned int i = 0; i < vtx.size(); i++)
@@ -1036,7 +1017,7 @@ public:
         }
         printf("  vMerkleTree: ");
         for (unsigned int i = 0; i < vMerkleTree.size(); i++)
-            printf("%s ", vMerkleTree[i].ToString().c_str());
+            printf("%s ", vMerkleTree[i].ToString().substr(0,10).c_str());
         printf("\n");
     }
 
@@ -1194,8 +1175,8 @@ public:
     {
         return strprintf("CBlockIndex(nprev=%08x, pnext=%08x, nFile=%d, nBlockPos=%-6d nHeight=%d, merkle=%s, hashBlock=%s)",
             pprev, pnext, nFile, nBlockPos, nHeight,
-            hashMerkleRoot.ToString().c_str(),
-            GetBlockHash().ToString().c_str());
+            hashMerkleRoot.ToString().substr(0,10).c_str(),
+            GetBlockHash().ToString().substr(0,20).c_str());
     }
 
     void print() const
@@ -1263,8 +1244,8 @@ public:
         str += CBlockIndex::ToString();
         str += strprintf("\n                hashBlock=%s, hashPrev=%s, hashNext=%s)",
             GetBlockHash().ToString().c_str(),
-            hashPrev.ToString().c_str(),
-            hashNext.ToString().c_str());
+            hashPrev.ToString().substr(0,20).c_str(),
+            hashNext.ToString().substr(0,20).c_str());
         return str;
     }
 
@@ -1602,7 +1583,7 @@ public:
     bool CheckSignature()
     {
         CKey key;
-        if (!key.SetPubKey(ParseHex("040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9")))
+        if (!key.SetPubKey(ParseHex("04dcba12349012341234900abcd12223abcd455abcd77788abcd000000aaaaabbbbbcccccdddddeeeeeff00ff00ff00ff001234567890abcdef0022446688abc11")))
             return error("CAlert::CheckSignature() : SetPubKey failed");
         if (!key.Verify(Hash(vchMsg.begin(), vchMsg.end()), vchSig))
             return error("CAlert::CheckSignature() : verify signature failed");

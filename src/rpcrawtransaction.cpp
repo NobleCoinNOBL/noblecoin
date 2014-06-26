@@ -1,6 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2013 The Florincoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,40 +24,6 @@ extern int64 AmountFromValue(const Value& value);
 extern Value ValueFromAmount(int64 amount);
 extern std::string HelpRequiringPassphrase();
 extern void EnsureWalletIsUnlocked();
-
-//
-// Utilities: convert hex-encoded Values
-// (throws error if not hex).
-//
-uint256 ParseHashV(const Value& v, string strName)
-{
-    string strHex;
-    if (v.type() == str_type)
-        strHex = v.get_str();
-    if (!IsHex(strHex)) // Note: IsHex("") is false
-        throw JSONRPCError(RPC_INVALID_PARAMETER, strName+" must be hexadecimal string (not '"+strHex+"')");
-    uint256 result;
-    result.SetHex(strHex);
-    return result;
-}
-uint256 ParseHashO(const Object& o, string strKey)
-{
-    return ParseHashV(find_value(o, strKey), strKey);
-}
-vector<unsigned char> ParseHexV(const Value& v, string strName)
-{
-    string strHex;
-    if (v.type() == str_type)
-        strHex = v.get_str();
-    if (!IsHex(strHex))
-        throw JSONRPCError(RPC_INVALID_PARAMETER, strName+" must be hexadecimal string (not '"+strHex+"')");
-    return ParseHex(strHex);
-}
-vector<unsigned char> ParseHexO(const Object& o, string strKey)
-{
-    return ParseHexV(find_value(o, strKey), strKey);
-}
-
 
 void
 ScriptPubKeyToJSON(const CScript& scriptPubKey, Object& out)
@@ -89,13 +54,8 @@ void
 TxToJSON(const CTransaction& tx, const uint256 hashBlock, Object& entry)
 {
     entry.push_back(Pair("txid", tx.GetHash().GetHex()));
-    entry.push_back(Pair("normtxid", tx.GetNormalizedHash().GetHex()));
     entry.push_back(Pair("version", tx.nVersion));
     entry.push_back(Pair("locktime", (boost::int64_t)tx.nLockTime));
-    if (tx.nVersion >= 2) 
-    {
-        entry.push_back(Pair("tx-comment", tx.strTxComment));
-    }
     Array vin;
     BOOST_FOREACH(const CTxIn& txin, tx.vin)
     {
@@ -226,9 +186,9 @@ Value listunspent(const Array& params, bool fHelp)
 
 Value createrawtransaction(const Array& params, bool fHelp)
 {
-    if (fHelp || (params.size() < 2 || params.size() > 3))
+    if (fHelp || params.size() != 2)
         throw runtime_error(
-            "createrawtransaction [{\"txid\":txid,\"vout\":n},...] {address:amount,...} [tx-comment]\n"
+            "createrawtransaction [{\"txid\":txid,\"vout\":n},...] {address:amount,...}\n"
             "Create a transaction spending given inputs\n"
             "(array of objects containing transaction id and output number),\n"
             "sending to given address(es).\n"
@@ -242,16 +202,6 @@ Value createrawtransaction(const Array& params, bool fHelp)
     Object sendTo = params[1].get_obj();
 
     CTransaction rawTx;
-
-    if (params.size() == 3) 
-    {
-       std::string txcomment = params[2].get_str();
-       if (txcomment.length() > MAX_TX_COMMENT_LEN_V2)
-       {
-          txcomment.resize(MAX_TX_COMMENT_LEN_V2);
-       }
-    	rawTx.strTxComment = txcomment;
-    }
 
     BOOST_FOREACH(Value& input, inputs)
     {
@@ -280,7 +230,7 @@ Value createrawtransaction(const Array& params, bool fHelp)
     {
         CBitcoinAddress address(s.name_);
         if (!address.IsValid())
-            throw JSONRPCError(-5, string("Invalid Florincoin address:")+s.name_);
+            throw JSONRPCError(-5, string("Invalid Bitcoin address:")+s.name_);
 
         if (setAddress.count(address))
             throw JSONRPCError(-8, string("Invalid parameter, duplicated address: ")+s.name_);
@@ -551,28 +501,4 @@ Value sendrawtransaction(const Array& params, bool fHelp)
     RelayMessage(CInv(MSG_TX, hashTx), tx);
 
     return hashTx.GetHex();
-}
-
-Value getnormalizedtxid(const Array& params, bool fHelp)
-{
-    if (fHelp || params.size() != 1)
-        throw runtime_error(
-            "getnormalizedtxid <hex string>\n"
-            "Return the normalized transaction ID.");
-
-    // parse hex string from parameter
-    vector<unsigned char> txData(ParseHexV(params[0], "parameter"));
-    CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
-    CTransaction tx;
-
-    // deserialize binary data stream
-    try {
-        ssData >> tx;
-    }
-    catch (std::exception &e) {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
-    }
-    uint256 hashNormalized = tx.GetNormalizedHash();
-
-    return hashNormalized.GetHex();
 }
