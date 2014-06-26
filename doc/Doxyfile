@@ -1,3 +1,6 @@
+# Copyright (c) 2014 NobleCoin Developers (Packaged for Version 1.1 2014)
+# Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 # Doxyfile 1.7.4
 
 # !!! Invoke doxygen from project root using: 
@@ -28,7 +31,7 @@ DOXYFILE_ENCODING      = UTF-8
 # The PROJECT_NAME tag is a single word (or a sequence of words surrounded 
 # by quotes) that should identify the project.
 
-PROJECT_NAME           = Bitcoin
+PROJECT_NAME           = NobleCoin
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. 
 # This could be handy for archiving the generated documentation or 
@@ -203,7 +206,7 @@ TAB_SIZE               = 8
 # For example adding "sideeffect=\par Side Effects:\n" will allow you to 
 # put the command \sideeffect (or @sideeffect) in the documentation, which 
 # will result in a user-defined paragraph with heading "Side Effects:". 
-# You can put \n's in the value part of an alias to insert newlines.
+# You can put \n in the value part of an alias to insert newlines.
 
 ALIASES                = 
 
