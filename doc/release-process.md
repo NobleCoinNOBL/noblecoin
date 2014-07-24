@@ -161,4 +161,4 @@ From a directory containing noblecoin source, gitian.sigs and gitian zips
 	popd
 
 - Upload gitian zips to SourceForge
-- Celebrate 
+- Celebrate
