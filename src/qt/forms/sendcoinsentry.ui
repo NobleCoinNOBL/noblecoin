@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>729</width>
-    <height>136</height>
+    <height>140</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,10 @@
       <string>A&amp;mount:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
      </property>
      <property name="buddy">
       <cstring>payAmount</cstring>
@@ -39,10 +42,13 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Pay &amp;To:</string>
+      <string>Pa&amp;y </string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
      </property>
      <property name="buddy">
       <cstring>payTo</cstring>
@@ -50,7 +56,15 @@
     </widget>
    </item>
    <item row="5" column="1">
-    <widget class="BitcoinAmountField" name="payAmount"/>
+    <widget class="BitcoinAmountField" name="payAmount">
+     <property name="styleSheet">
+      <string notr="true">	border-radius: 6px;
+	border-width: 0;
+	padding: 8px;
+	background-color: #111;
+	color: white;</string>
+     </property>
+    </widget>
    </item>
    <item row="4" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -75,7 +89,10 @@
       <string>&amp;Label:</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
      </property>
      <property name="buddy">
       <cstring>addAsLabel</cstring>
@@ -90,7 +107,7 @@
      <item>
       <widget class="QValidatedLineEdit" name="payTo">
        <property name="toolTip">
-        <string>The address to send the payment to  (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</string>
+        <string>The address to send the payment to (e.g. 9hwDHcoCUvKozQFfGxmcjBEk7Gzag3ueDx)</string>
        </property>
        <property name="maxLength">
         <number>34</number>
@@ -152,7 +169,7 @@
  <customwidgets>
   <customwidget>
    <class>BitcoinAmountField</class>
-   <extends>QLineEdit</extends>
+   <extends>QSpinBox</extends>
    <header>bitcoinamountfield.h</header>
    <container>1</container>
   </customwidget>
