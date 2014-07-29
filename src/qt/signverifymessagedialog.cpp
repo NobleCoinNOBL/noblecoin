@@ -24,10 +24,10 @@ SignVerifyMessageDialog::SignVerifyMessageDialog(QWidget *parent) :
 
 #if (QT_VERSION >= 0x040700)
     /* Do not move this to the XML file, Qt before 4.7 will choke on it */
-    ui->addressIn_SM->setPlaceholderText(tr("Enter a NobleCoin address"));
+    ui->addressIn_SM->setPlaceholderText(tr("Enter a NobleCoin address (e.g. 9hwDHcoCUvKozQFfGxmcjBEk7Gzag3ueDx)"));
     ui->signatureOut_SM->setPlaceholderText(tr("Click \"Sign Message\" to generate signature"));
 
-    ui->addressIn_VM->setPlaceholderText(tr("Enter a NobleCoin address"));
+    ui->addressIn_VM->setPlaceholderText(tr("Enter a NobleCoin address (e.g. 9hwDHcoCUvKozQFfGxmcjBEk7Gzag3ueDx)"));
     ui->signatureIn_VM->setPlaceholderText(tr("Enter NobleCoin signature"));
 #endif
 
@@ -126,7 +126,7 @@ void SignVerifyMessageDialog::on_signMessageButton_SM_clicked()
     if (!ctx.isValid())
     {
         ui->statusLabel_SM->setStyleSheet("QLabel { color: red; }");
-        ui->statusLabel_SM->setText(tr("Wallet unlock was canceled."));
+        ui->statusLabel_SM->setText(tr("Wallet unlock was cancelled."));
         return;
     }
 

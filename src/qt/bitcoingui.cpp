@@ -57,6 +57,7 @@
 #include <QDragEnterEvent>
 #include <QUrl>
 
+
 #include <iostream>
 
 BitcoinGUI::BitcoinGUI(QWidget *parent):
@@ -89,11 +90,29 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     createMenuBar();
 
     // Create the toolbars
+
     createToolBars();
 
     // Create the tray icon (or setup the dock icon)
     createTrayIcon();
 
+	QPalette p;
+	p.setColor(QPalette::Window, QColor(0x22, 0x22, 0x22));
+	p.setColor(QPalette::Button, QColor(0x22, 0x22, 0x22));
+	p.setColor(QPalette::Mid, QColor(0x22, 0x22, 0x22));
+	p.setColor(QPalette::Base, QColor(0x22, 0x22, 0x22));
+	p.setColor(QPalette::AlternateBase, QColor(0x22, 0x22, 0x22));
+	setPalette(p);
+	QFile style(":/text/res/text/style.qss");
+	style.open(QFile::ReadOnly);
+	setStyleSheet(QString::fromUtf8(style.readAll()));
+
+    /* don't override the background color of the toolbar on mac os x due to
+       the whole component it resides on not being paintable
+     */
+#ifdef Q_OS_MAC
+    toolbar->setStyleSheet("QToolBar { background-color: transparent; border: 0px solid black; padding: 3px; }");
+#endif
     // Create tabs
     overviewPage = new OverviewPage();
 
@@ -114,6 +133,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     signVerifyMessageDialog = new SignVerifyMessageDialog(this);
 
     centralWidget = new QStackedWidget(this);
+
     centralWidget->addWidget(overviewPage);
     centralWidget->addWidget(miningPage);
     centralWidget->addWidget(transactionsPage);
@@ -167,7 +187,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), this, SLOT(gotoHistoryPage()));
     connect(overviewPage, SIGNAL(transactionClicked(QModelIndex)), transactionView, SLOT(focusTransaction(QModelIndex)));
 
-    // Doubleclicking on a transaction on the transaction history page shows details
+    // Double-clicking on a transaction on the transaction history page shows details
     connect(transactionView, SIGNAL(doubleClicked(QModelIndex)), transactionView, SLOT(showDetails()));
 
     rpcConsole = new RPCConsole(this);
@@ -205,6 +225,7 @@ void BitcoinGUI::createActions()
     miningAction->setCheckable(true);
     tabGroup->addAction(miningAction);
 
+
     historyAction = new QAction(QIcon(":/icons/history"), tr("&Transactions"), this);
     historyAction->setToolTip(tr("Browse transaction history"));
     historyAction->setCheckable(true);
@@ -217,13 +238,13 @@ void BitcoinGUI::createActions()
     addressBookAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_5));
     tabGroup->addAction(addressBookAction);
 
-    receiveCoinsAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Receive coins"), this);
+    receiveCoinsAction = new QAction(QIcon(":/icons/receiving_addresses"), tr("&Receive"), this);
     receiveCoinsAction->setToolTip(tr("Show the list of addresses for receiving payments"));
     receiveCoinsAction->setCheckable(true);
     receiveCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_3));
     tabGroup->addAction(receiveCoinsAction);
 
-    sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send coins"), this);
+    sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send"), this);
     sendCoinsAction->setToolTip(tr("Send coins to a NobleCoin address"));
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -300,6 +321,8 @@ void BitcoinGUI::createActions()
     connect(encryptWalletAction, SIGNAL(triggered(bool)), this, SLOT(encryptWallet(bool)));
     connect(backupWalletAction, SIGNAL(triggered()), this, SLOT(backupWallet()));
     connect(changePassphraseAction, SIGNAL(triggered()), this, SLOT(changePassphrase()));
+
+
 }
 
 void BitcoinGUI::createMenuBar()
