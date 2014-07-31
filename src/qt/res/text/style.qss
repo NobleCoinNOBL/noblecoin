@@ -165,4 +165,12 @@ QTabWidget {
      margin: 0; /* if there is only one tab, we don't want overlapping margins */
  }
 
-
+QFrame#userView
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+    font-weight: normal;
+    border-color: white;
+    border-width: 10px;
+    border-radius: 2px;
+}

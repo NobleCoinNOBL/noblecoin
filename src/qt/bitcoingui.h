@@ -14,6 +14,7 @@ class SendCoinsDialog;
 class SignVerifyMessageDialog;
 class Notificator;
 class RPCConsole;
+class ChatWindow; //Add Chat Window
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -60,6 +61,7 @@ private:
     QStackedWidget *centralWidget;
 
     OverviewPage *overviewPage;
+	ChatWindow *chatWindow; //Add Chat Window
     QWidget *transactionsPage;
     AddressBookPage *addressBookPage;
     AddressBookPage *receiveCoinsPage;
@@ -80,6 +82,7 @@ private:
     QAction *addressBookAction;
     QAction *signMessageAction;
     QAction *verifyMessageAction;
+	QAction *chatAction; //Add Chat Window
     QAction *firstClassMessagingAction;
     QAction *aboutAction;
     QAction *receiveCoinsAction;
@@ -143,6 +146,9 @@ private slots:
     void gotoReceiveCoinsPage();
     /** Switch to send coins page */
     void gotoSendCoinsPage();
+	
+	/** Switch to IRC Chat page */
+    void gotoChatPage(); //Add Chat Window
 
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");

@@ -27,6 +27,7 @@
 #include "notificator.h"
 #include "guiutil.h"
 #include "rpcconsole.h"
+#include "chatwindow.h" //Include Chat Window
 
 #ifdef Q_WS_MAC
 #include "macdockiconhandler.h"
@@ -114,6 +115,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 #endif
     // Create tabs
     overviewPage = new OverviewPage();
+	chatWindow = new ChatWindow(this); //Create Chat Window
 
     transactionsPage = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout();
@@ -130,7 +132,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     signVerifyMessageDialog = new SignVerifyMessageDialog(this);
 
     centralWidget = new QStackedWidget(this);
-
+	centralWidget->addWidget(chatWindow); //Add Chat Window
     centralWidget->addWidget(overviewPage);
     centralWidget->addWidget(transactionsPage);
     centralWidget->addWidget(addressBookPage);
@@ -245,6 +247,11 @@ void BitcoinGUI::createActions()
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
     verifyMessageAction->setToolTip(tr("Verify a message to ensure it was signed with a specified Bitcoin address"));
     tabGroup->addAction(verifyMessageAction);
+	
+	chatAction = new QAction(QIcon(":/icons/ircchat"), tr("&Chat"), this); //Add Chat Window
+    chatAction->setToolTip(tr("View chat")); //Add Chat Window
+    chatAction->setCheckable(true); //Add Chat Window
+    tabGroup->addAction(chatAction); //Add Chat Window
 
 #ifdef FIRST_CLASS_MESSAGING
     firstClassMessagingAction = new QAction(QIcon(":/icons/edit"), tr("S&ignatures"), this);
@@ -267,6 +274,7 @@ void BitcoinGUI::createActions()
     connect(signMessageAction, SIGNAL(triggered()), this, SLOT(gotoSignMessageTab()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
+	connect(chatAction, SIGNAL(triggered()), this, SLOT(gotoChatPage())); //Add Chat Window
 #ifdef FIRST_CLASS_MESSAGING
     connect(firstClassMessagingAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     // Always start with the sign message tab for FIRST_CLASS_MESSAGING
@@ -355,6 +363,8 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(receiveCoinsAction);
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
+	toolbar->addAction(chatAction); //Add Chat Window
+	
 #ifdef FIRST_CLASS_MESSAGING
     toolbar->addAction(firstClassMessagingAction);
 #endif
@@ -421,7 +431,8 @@ void BitcoinGUI::setWalletModel(WalletModel *walletModel)
         receiveCoinsPage->setModel(walletModel->getAddressTableModel());
         sendCoinsPage->setModel(walletModel);
         signVerifyMessageDialog->setModel(walletModel);
-
+		chatWindow->setModel(clientModel); 	//Add Chat Window
+		
         setEncryptionStatus(walletModel->getEncryptionStatus());
         connect(walletModel, SIGNAL(encryptionStatusChanged(int)), this, SLOT(setEncryptionStatus(int)));
 
@@ -941,3 +952,20 @@ void BitcoinGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
+
+//Add Chat Window
+void BitcoinGUI::gotoChatPage()
+ {
+    chatAction->setChecked(true);
+    centralWidget->setCurrentWidget(chatWindow);
+
+    exportAction->setEnabled(true);
+    exportAction->setVisible(true);
+
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+    exportAction->setVisible(false);
+
+    exportAction->setEnabled(false);
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+}
+//End Add Chat Window
