@@ -91,7 +91,6 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     createMenuBar();
 
     // Create the toolbars
-
     createToolBars();
 
     // Create the tray icon (or setup the dock icon)
@@ -118,7 +117,6 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     overviewPage = new OverviewPage();
 	chatWindow = new ChatWindow(this); //Create Chat Window
 	blockExplorer = new BlockExplorer(this); //Include Block Explorer
-
     transactionsPage = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout();
     transactionView = new TransactionView(this);
