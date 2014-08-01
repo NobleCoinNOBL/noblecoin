@@ -20,6 +20,7 @@
 #include "transactiondescdialog.h"
 #include "addresstablemodel.h"
 #include "transactionview.h"
+#include "blockexplorer.h" //Include Block Explorer
 #include "overviewpage.h"
 #include "bitcoinunits.h"
 #include "guiconstants.h"
@@ -116,6 +117,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
     // Create tabs
     overviewPage = new OverviewPage();
 	chatWindow = new ChatWindow(this); //Create Chat Window
+	blockExplorer = new BlockExplorer(this); //Include Block Explorer
 
     transactionsPage = new QWidget(this);
     QVBoxLayout *vbox = new QVBoxLayout();
@@ -133,6 +135,7 @@ BitcoinGUI::BitcoinGUI(QWidget *parent):
 
     centralWidget = new QStackedWidget(this);
 	centralWidget->addWidget(chatWindow); //Add Chat Window
+	centralWidget->addWidget(blockExplorer); //Create Block Explorer
     centralWidget->addWidget(overviewPage);
     centralWidget->addWidget(transactionsPage);
     centralWidget->addWidget(addressBookPage);
@@ -252,6 +255,13 @@ void BitcoinGUI::createActions()
     chatAction->setToolTip(tr("View chat")); //Add Chat Window
     chatAction->setCheckable(true); //Add Chat Window
     tabGroup->addAction(chatAction); //Add Chat Window
+	
+	blockAction = new QAction(QIcon(":/icons/explorer"), tr("&Explorer"), this); //Add Block Explorer
+    blockAction->setToolTip(tr("Explore the NobleCoin blockchain")); //Add Block Explorer
+    blockAction->setCheckable(true); //Add Block Explorer 
+    blockAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_6)); //Add Block Explorer
+    tabGroup->addAction(blockAction); //Add Block Explorer
+
 
 #ifdef FIRST_CLASS_MESSAGING
     firstClassMessagingAction = new QAction(QIcon(":/icons/edit"), tr("S&ignatures"), this);
@@ -275,6 +285,8 @@ void BitcoinGUI::createActions()
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
 	connect(chatAction, SIGNAL(triggered()), this, SLOT(gotoChatPage())); //Add Chat Window
+	connect(blockAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized())); //Add Block Explorer
+	connect(blockAction, SIGNAL(triggered()), this, SLOT(gotoBlockExplorer())); //Add Block Explorer
 #ifdef FIRST_CLASS_MESSAGING
     connect(firstClassMessagingAction, SIGNAL(triggered()), this, SLOT(showNormalIfMinimized()));
     // Always start with the sign message tab for FIRST_CLASS_MESSAGING
@@ -364,6 +376,7 @@ void BitcoinGUI::createToolBars()
     toolbar->addAction(historyAction);
     toolbar->addAction(addressBookAction);
 	toolbar->addAction(chatAction); //Add Chat Window
+	toolbar->addAction(blockAction); //Add Block Explorer
 	
 #ifdef FIRST_CLASS_MESSAGING
     toolbar->addAction(firstClassMessagingAction);
@@ -432,6 +445,7 @@ void BitcoinGUI::setWalletModel(WalletModel *walletModel)
         sendCoinsPage->setModel(walletModel);
         signVerifyMessageDialog->setModel(walletModel);
 		chatWindow->setModel(clientModel); 	//Add Chat Window
+		blockExplorer->setModel(clientModel); //Add Block Explorer
 		
         setEncryptionStatus(walletModel->getEncryptionStatus());
         connect(walletModel, SIGNAL(encryptionStatusChanged(int)), this, SLOT(setEncryptionStatus(int)));
@@ -969,3 +983,20 @@ void BitcoinGUI::gotoChatPage()
     disconnect(exportAction, SIGNAL(triggered()), 0, 0);
 }
 //End Add Chat Window
+
+//Add Block Explorer
+void BitcoinGUI::gotoBlockExplorer()
+{
+    blockAction->setChecked(true);
+    centralWidget->setCurrentWidget(blockExplorer);
+
+    exportAction->setEnabled(true);
+    exportAction->setVisible(true);
+
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+    exportAction->setVisible(false);
+
+    exportAction->setEnabled(false);
+    disconnect(exportAction, SIGNAL(triggered()), 0, 0);
+}
+//Edd Add Block Explorer

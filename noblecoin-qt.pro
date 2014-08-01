@@ -173,7 +173,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/version.h \
     src/qt/rpcconsole.h \
 	src/qt/ircserver.h \
-    src/qt/chatwindow.h
+    src/qt/chatwindow.h \
+	src/qt/blockexplorer.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -236,7 +237,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/miningpage.cpp \
     src/noui.cpp \
 	src/qt/ircserver.cpp \
-    src/qt/chatwindow.cpp
+    src/qt/chatwindow.cpp \
+	src/qt/blockexplorer.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -254,7 +256,8 @@ FORMS += \
     src/qt/forms/rpcconsole.ui \
     src/qt/forms/miningpage.ui \
     src/qt/forms/optionsdialog.ui \
-	src/qt/forms/chatwindow.ui 
+	src/qt/forms/chatwindow.ui \
+	src/qt/forms/blockexplorer.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h

@@ -92,7 +92,7 @@ QPushButton:disabled, QToolButton:disabled {
           <cursorShape>IBeamCursor</cursorShape>
          </property>
          <property name="text">
-          <string notr="true">0.3.666-beta</string>
+          <string notr="true">1.0.1.3</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
