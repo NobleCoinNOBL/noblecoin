@@ -486,10 +486,10 @@ QTabWidget {
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start Guerillacoin after logging in to the system.</string>
+          <string>Automatically start NobleCoin after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start Guerillacoin on system login</string>
+          <string>&amp;Start NobleCoin on system login</string>
          </property>
         </widget>
        </item>
@@ -526,7 +526,7 @@ QTabWidget {
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the Guerillacoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the NobleCoin client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -536,7 +536,7 @@ QTabWidget {
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the Guerillacoin network through a SOCKS proxy (e.g. when connecting through Tor).</string>
+          <string>Connect to the NobleCoin network through a SOCKS proxy (e.g. when connecting through Tor).</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS proxy:</string>
@@ -749,7 +749,7 @@ QComboBox::drop-down {
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting Guerillacoin.</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting NobleCoin.</string>
            </property>
            <property name="styleSheet">
             <string notr="true">QLineEdit {
@@ -834,7 +834,7 @@ QComboBox::drop-down {
        <item>
         <widget class="QCheckBox" name="displayAddresses">
          <property name="toolTip">
-          <string>Whether to show Guerillacoin addresses in the transaction list or not.</string>
+          <string>Whether to show NobleCoin addresses in the transaction list or not.</string>
          </property>
          <property name="text">
           <string>&amp;Display addresses in transaction list</string>

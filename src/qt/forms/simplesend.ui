@@ -59,17 +59,17 @@
     <widget class="QComboBox" name="amountUnits">
      <item>
       <property name="text">
-       <string>GUE</string>
+       <string>NOBL</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>mGUE</string>
+       <string>mNOBL</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>uGUE</string>
+       <string>uNOBL</string>
       </property>
      </item>
     </widget>
