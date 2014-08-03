@@ -23,3 +23,20 @@ corresponding issue labeled 'stagnant'.
 
 Issues with no commits will be given a similar warning, and closed after 15 days from their last activity. 
 Issues closed in this manner will be labeled 'stale'.
+
+Links
+=============================
+
+Website: https://www.noblemovement.com
+Marketplace: https://marketplace.noblemovement.com
+BitcoinTalk: https://bitcointalk.org/index.php?topic=402667.0
+Twitter: https://twitter.com/NobleCoin
+Reddit: http://www.reddit.com/r/NobleCoin
+IRC Channel: http://webchat.freenode.net/?channels=#noblecoin
+
+ 
+QR Code Ubuntu Dependencies Required:
+=============================
+sudo apt-get install build-essential libboost-all-dev libcurl4-openssl-dev libdb5.1-dev libdb5.1++-dev git qt-sdk libminiupnpc-dev
+
+sudo apt-get install qrencode libqrencode-dev 
