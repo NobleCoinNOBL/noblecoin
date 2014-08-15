@@ -24,6 +24,11 @@ corresponding issue labeled 'stagnant'.
 Issues with no commits will be given a similar warning, and closed after 15 days from their last activity. 
 Issues closed in this manner will be labeled 'stale'.
 
+Wallet
+=============================
+
+![Screen 1](https://www.noblemovement.com/images/w2.png)
+
 Links
 =============================
 
