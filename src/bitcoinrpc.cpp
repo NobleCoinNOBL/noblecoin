@@ -314,7 +314,7 @@ Value getdifficulty(const Array& params, bool fHelp)
 }
 
 
-// Litecoin: Return average network hashes per second based on last number of blocks.
+// NobleCoin: Return average network hashes per second based on last number of blocks.
 Value GetNetworkHashPS(int lookup) {
     if (pindexBest == NULL)
         return 0;
@@ -2106,7 +2106,7 @@ Value getwork(const Array& params, bool fHelp)
         result.push_back(Pair("data",     HexStr(BEGIN(pdata), END(pdata))));
         result.push_back(Pair("hash1",    HexStr(BEGIN(phash1), END(phash1)))); // deprecated
         result.push_back(Pair("target",   HexStr(BEGIN(hashTarget), END(hashTarget))));
-        result.push_back(Pair("algorithm", "scrypt:1024,1,1"));  // Litecoin: specify that we should use the scrypt algorithm
+        result.push_back(Pair("algorithm", "scrypt:1024,1,1"));  // NobleCOin: specify that we should use the scrypt algorithm
         return result;
     }
     else
