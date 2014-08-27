@@ -27,7 +27,7 @@ Issues closed in this manner will be labeled 'stale'.
 Wallet
 =============================
 
-![Screen 1](https://www.noblemovement.com/images/wallet_screenshots.png)
+![Screen 1](https://www.noblemovement.com/images/wallet_screenshots.jpg)
 
 Links
 =============================
