@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 1.1.1
+!define VERSION 1.1.0.2
 !define COMPANY "NobleCoin project"
 !define URL https://www.noblemovement.com
 
