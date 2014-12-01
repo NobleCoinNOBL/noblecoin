@@ -1335,3 +1335,15 @@ void RenameThread(const char* name)
     (void)name;
 #endif
 }
+
+bool CreateThread(void(*pfn)(void*), void* parg)
+{
+    try
+    {
+        boost::thread(pfn, parg); // thread detaches when out of scope
+    } catch(boost::thread_resource_error &e) {
+        printf("Error creating thread: %s\n", e.what());
+        return false;
+    }
+    return true;
+}
