@@ -3,8 +3,11 @@ TARGET = noblecoin-qt
 VERSION = 1.1.0.2
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
-DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
+DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
+CONFIG += thread
+CONFIG += static
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #uncomment the following section to enable building on windows (be sure to check dependency paths):
 windows:LIBS += -lshlwapi
@@ -71,11 +74,32 @@ contains(USE_DBUS, 1) {
     QT += dbus
 }
 
+# Disable for native win builds until upstream patch
+
+# use: qmake "USE_IPV6=1" ( enabled by default; default)
+#  or: qmake "USE_IPV6=0" (disabled by default)
+#  or: qmake "USE_IPV6=-" (not supported)
+contains(USE_IPV6, -) {
+    message(Building without IPv6 support)
+} else {
+    message(Building with IPv6 support)
+    count(USE_IPV6, 0) {
+        USE_IPV6=1
+    }
+    DEFINES += USE_IPV6=$$USE_IPV6
+}
+
 # use: qmake "FIRST_CLASS_MESSAGING=1"
 contains(FIRST_CLASS_MESSAGING, 1) {
     message(Building with first-class messaging)
     DEFINES += FIRST_CLASS_MESSAGING
 }
+
+win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
+# on Windows: enable GCC large address aware linker flag
+win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
+# i686-w64-mingw32
+win32:QMAKE_LFLAGS *= -static-libgcc -static-libstdc++
 
 contains(BITCOIN_NEED_QT_PLUGINS, 1) {
     DEFINES += BITCOIN_NEED_QT_PLUGINS
@@ -200,9 +224,6 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/addrman.cpp \
     src/db.cpp \
     src/walletdb.cpp \
-    src/json/json_spirit_writer.cpp \
-    src/json/json_spirit_value.cpp \
-    src/json/json_spirit_reader.cpp \
     src/qt/clientmodel.cpp \
     src/qt/guiutil.cpp \
     src/qt/transactionrecord.cpp \
