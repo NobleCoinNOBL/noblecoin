@@ -6,7 +6,6 @@ QT += core gui network
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
 CONFIG += thread
-CONFIG += static
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 #uncomment the following section to enable building on windows (be sure to check dependency paths):
@@ -97,7 +96,7 @@ contains(FIRST_CLASS_MESSAGING, 1) {
 
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
 # on Windows: enable GCC large address aware linker flag
-win32:QMAKE_LFLAGS *= -Wl,--large-address-aware -static
+win32:QMAKE_LFLAGS *= -Wl,--large-address-aware
 # i686-w64-mingw32
 win32:QMAKE_LFLAGS *= -static-libgcc -static-libstdc++
 
