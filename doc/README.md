@@ -32,7 +32,7 @@ Unpack the files into a directory and run:
 - bin/32/noblecoin-qt (GUI, 32-bit)
 - bin/32/noblecoind (headless, 32-bit)
 - bin/64/noblecoin-qt (GUI, 64-bit)
-- bin/64/noblecoind (headless, 64-bit)
+- bin/64/noblecoind (headless, 64-bit) 
 
 See the documentation at the [NobleCoin Wiki](http://noblecoin.info)
 for help and more information.
