@@ -24,20 +24,16 @@ corresponding issue labeled 'stagnant'.
 Issues with no commits will be given a similar warning, and closed after 15 days from their last activity. 
 Issues closed in this manner will be labeled 'stale'.
 
-Wallet
-=============================
 
-![Screen 1](https://www.noblemovement.com/images/wallet_screenshots.jpg)
+Website: https://www.noblecoin.io/
 
-Links
-=============================
+Marketplace: https://coinmarketcap.com/currencies/noblecoin/
 
-Website: https://www.noblemovement.com
-Marketplace: https://marketplace.noblemovement.com
 BitcoinTalk: https://bitcointalk.org/index.php?topic=402667.0
-Twitter: https://twitter.com/NobleCoin
+
+Twitter: https://twitter.com/NobleCoinNOBL
+
 Reddit: http://www.reddit.com/r/NobleCoin
-IRC Channel: http://webchat.freenode.net/?channels=#noblecoin
 
  
 QR Code Ubuntu Dependencies Required:
